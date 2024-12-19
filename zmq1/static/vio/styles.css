@@ -1,0 +1,342 @@
+/* ==========================
+   全局样式
+========================== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 15px;
+    color: #444;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+p {
+    margin: 0 0 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* ==========================
+   Header 样式
+========================== */
+header {
+    background-color: darkslategrey;
+    padding: 10px 20px;
+    color: #fff;
+    border-bottom: 3px solid #34495e;
+    text-align: center;
+}
+
+header form {
+    margin: 10px 0 0;
+}
+
+header form input[type="text"] {
+    padding: 8px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+header form button {
+    padding: 8px 15px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+header form button:hover {
+    background-color: #2980b9;
+}
+
+/* ==========================
+   布局样式
+========================== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 左侧导航栏 */
+.sidebar {
+    flex: 0 0 150px; /* 固定宽度 */
+    background-color: darkslategrey;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sidebar ul {
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* 主内容 */
+.content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* ==========================
+   首页样式
+========================== */
+.index-layout {
+    display: flex;
+    gap: 20px;
+}
+
+/* 主内容区域 */
+.main-content {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.article-list {
+    margin-bottom: 15px;
+}
+
+.article-list .article-title {
+    font-size: 18px;
+    color: #3498db;
+}
+
+.article-list .article-title:hover {
+    text-decoration: underline;
+}
+
+.article-list .article-content {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+.article-list .article-meta {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* 排行榜区域 */
+.rankings {
+    flex: 0 0 300px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.rankings h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.rankings ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rankings ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.rankings ul li:last-child {
+    border-bottom: none;
+}
+
+/* ===== 个人中心样式 ===== */
+/* 个人中心主容器: <div class="profile"> */
+.profile {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* 用户信息卡片: <div class="profile-card"> */
+.profile-card {
+    background: #fff;
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* 用户头像: <img class="profile-avatar"> */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 用户信息: <div class="profile-info"> */
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h2 {
+    margin-bottom: 0.5rem;
+}
+
+/* 用户文章和评论选项卡: <div class="profile-tabs"> */
+.profile-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.profile-tab {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 20px solid transparent;
+}
+
+.profile-tab.active {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+/* ==========================
+   响应式设计
+========================== */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .index-layout {
+        flex-direction: column;
+    }
+
+    .rankings {
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+}
+
+/* 表单页面容器 */
+.form-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 表单标题 */
+.form-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 表单组 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* 表单标签 */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* 表单字段 */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group input[type="file"] {
+    font-size: 14px;
+    border: none;
+}
+
+/* 按钮 */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
