@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+    <div class="article-list">
+        <div class="article-title">{{ article.title }}</div>
+        <div class="article-meta">作者：{{ article.author.username }} 发布时间：{{ article.created_at|date:'y-m-d H:i' }}</div>
+        <div class="article-content">{{ article.content }}</div>
+    </div>
+    <div class="article-meta">
+        点赞数: <span id="like-count">{{ article.likes }}</span>
+        <button id="like-button">点赞</button>
+    </div>
+
+    {% if article.author == user %}
+        <div class="article-actions">
+            <a href="{% url 'article_update' article.id %}">编辑</a>
+            <a href="{% url 'article_delete' article.id %}">删除</a>
+        </div>
+    {% endif %}
+    <br>
+    <hr>
+    <h2>评论</h2>
+    <ul>
+        {% for comment in article.comments.all %}   <!-- article.comment只是一个关系管理器，并不是查询集，要调用all-->
+            <li>
+                <div class="article-meta">{{ comment.author.username }}</div><br>
+                <div class="article-content">{{ comment.content }}</div>
+                <br>
+                <small>{{ comment.created_at }}</small>
+                {% if comment.author == user %}
+                    <div><a href="{% url 'comment_delete' comment.id %}">删除</a></div>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>暂无评论</p>
+        {% endfor %}
+    </ul>
+    <br>
+    {% if article.comments.count > 0 %}
+        <p>共{{ article.comments.count }}条</p>
+    {% endif %}
+    <hr>
+    <div class="comments-section">
+        <form action="{% url 'comment_create' article.id %}" method="post" class="comment-form">
+            {% csrf_token %}
+            {{ form.content.label }}
+            <br>
+            {{ form.content }}
+            <button type="submit">评论</button>
+    </form>
+    </div>
+
+    <script>
+        // 获取点赞按钮和点赞数量
+        const likeButton = document.getElementById('like-button')
+        const likeCounnt = document.getElementById('like-count')
+
+        // 点赞按钮事件
+        likeButton.addEventListener('click', function() {
+            // 发送AJAX请求到后端的点赞接口
+            fetch('{% url 'like_article' article.id%}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                likeCounnt.innerText = data.likes;
+            })
+            .catch(error => {
+                console.error('Error', error)
+            });
+        });
+    </script>
+{% endblock %}

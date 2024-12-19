@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}创建文章{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>发布内容</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit">发布文章</button>
+    </form>
+</div>
+{% endblock %}

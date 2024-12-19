@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ request.user }}的个人主页{% endblock %}
+
+{% block content %}
+    <!--个人信息-->
+    <div class="profile">
+        <div>
+            {% if user.profile.avatar %}
+                <a href="{% url 'profile_edit' %}">
+                    <img src="{{ user.profile.avatar.url }}" alt="头像" class="profile-avatar">
+                </a>
+            {% else %}
+                <img src="{{ '/media/avatars/1.jpg' }}" alt="默认头像" class="profile-avatar">
+            {% endif %}
+            <div class="profile-info">{{ user.profile.dis_name|default:user.username }}</div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h3>发表过的文章</h3>
+        <ul>
+            <li>
+                {% for article in articles %}
+                        <a href="{% url 'article_detail' article.id %}" class="article-title">{{ article.title }}</a>
+                    <div class="article-content">
+                        {{ article.content|slice:':50' }}
+                    </div>
+                {% empty %}
+                    <p>暂未发表文章</p>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <h3>发表过的评论</h3>
+    <ul>
+        {% for comment in comments %}
+            <a href="{% url 'article_detail' comment.article.id %}" class="article-title">{{ comment.article.title }}</a>
+            <div class="comment-content">
+                {{ comment.content }}<br>
+                <small>{{ comment.created_at|date:'y-m-d H:i' }}</small>
+            </div>
+
+        {% empty %}
+            <p>还未发表过评论</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

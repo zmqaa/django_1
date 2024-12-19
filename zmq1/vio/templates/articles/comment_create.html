@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}发表评论{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>发表评论</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit">提交评论</button>
+    </form>
+</div>
+{% endblock %}

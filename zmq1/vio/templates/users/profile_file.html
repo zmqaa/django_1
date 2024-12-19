@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}文件中心{% endblock %}
+
+{% block content %}
+    <h2>我的文件列表</h2>
+    <ul>
+        {% for file in files %}
+            <li>
+                <div>{{ file.original_name }}</div>
+                <small>{{ file.uploaded_at|date:'y-m-d H:i' }}</small>
+                <small><a href="{{ file.file.url }}" download>下载</a></small>
+            </li>
+        {% empty %}
+            <li>暂无文件</li>
+        {% endfor %}
+    </ul>
+    <h3>上传</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">上传文件</button>
+    </form>
+{% endblock %}

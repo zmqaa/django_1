@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}zmq{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'vio/styles.css' %}">
+</head>
+
+<body>
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+<header>
+    <form action="{% url 'index'  %}" method="get" class="search-form">
+        <input type="text" name="q" placeholder="搜索关键词" value="{{ query|default_if_none:'' }}">
+        <button type="submit">搜索</button>
+    </form>
+</header>
+
+<div class="layout">
+    <!-- 左侧导航栏 -->
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">主页</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">个人中心</a></li>
+                    <li><a href="{% url 'logout' %}">登出</a></li>
+                    <li><a href="{% url 'profile_file' %}">文件管理</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">登录</a></li>
+                    <li><a href="{% url 'register' %}">注册</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="content">
+        {% block content %}
+        {% endblock %}
+    </main>
+</div>
+
+</body>
+
+</html>
