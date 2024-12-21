@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <h2>数据处理</h2>
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">处理数据</button>
+    </div>
+</form>
+{% endblock %}

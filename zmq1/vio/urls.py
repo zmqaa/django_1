@@ -18,8 +18,10 @@ from .views import users, main, articles
 urlpatterns = [
     path('', main.index, name='index'),
     path('log/', main.log, name='log'),
+    path('weather/', main.weather_view, name='weather'),
     path('users/', include('vio.url.users')),
     path('articles/', include('vio.url.articles')),
+    path('files/', include('vio.url.files')),
     path('data/', include('vio.url.data')),
 ]
 

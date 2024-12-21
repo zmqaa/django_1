@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}数据分析{% endblock %}
+
+{% block content %}
+    <h2>数据大概</h2>
+
+    <!-- 错误信息 -->
+    {% if error %}
+        <div style="color: red;">{{ error }}</div>
+    {% endif %}
+
+    {% if metrics %}
+        <!-- 数据大小 -->
+        <h3>数据形状</h3>
+        <p>行数: {{ metrics.shape.rows }}</p>
+        <p>列数: {{ metrics.shape.columns }}</p>
+
+        <!-- 列名 -->
+        <h3>列名</h3>
+        <ul>
+            {% for column in metrics.columns %}
+                <li>{{ column }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- 缺失值 -->
+        <h3>缺失值统计</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>列名</th>
+                    <th>缺失值数量</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for column, missing in metrics.missing_values.items %}
+                    <tr>
+                        <td>{{ column }}</td>
+                        <td>{{ missing }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- 列类型 -->
+        <h3>列类型</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>列名</th>
+                    <th>类型</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for column, dtype in metrics.column_types.items %}
+                    <tr>
+                        <td>{{ column }}</td>
+                        <td>{{ dtype }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>前十行展示</h3>
+        {{ display_head|safe }}
+    {% endif %}
+{% endblock %}

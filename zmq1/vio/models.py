@@ -72,5 +72,5 @@ class AccessLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user} - {self.path} - {self.created_at}"
+        return f"{self.user} - {self.path} - {self.created_at} - {self.ip_address}"
 

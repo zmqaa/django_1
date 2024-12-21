@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>图表生成</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">生成图表</button>
+    </form>
+
+    {% if plot_html %}
+        <div>
+            {{ plot_html|safe }}
+        </div>
+    {% endif %}
+{% endblock %}

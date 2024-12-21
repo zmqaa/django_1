@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    天气查询
+{% endblock %}
+
+{% block content %}
+
+{% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="city">城市：</label>
+    <input type="text" id="city" name="city" placeholder="输入城市名称、拼音或代码">
+    <button type="submit">查询</button>
+</form>
+
+{% if weather_data %}
+    <h2>查询结果：</h2>
+    <p>城市：{{ weather_data.city }}</p>
+    <p>天气：{{ weather_data.weather }}</p>
+    <p>温度：{{ weather_data.temperature }}</p>
+    <p>风向：{{ weather_data.winddirection }}</p>
+    <p>风力：{{ weather_data.windpower }}</p>
+    <p>湿度：{{ weather_data.humidity }}</p>
+{% endif %}
+
+{% endblock %}
